@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BetterCord — 24/7 Bot Hosting</title>
+  <title>BetterCord Studio — 24/7 Bot Hosting</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #090a0f;
-      --card: rgba(20, 22, 34, 0.72);
-      --border: rgba(255, 255, 255, 0.08);
+      --card: rgba(20, 22, 34, 0.85);
+      --border: rgba(255, 255, 255, 0.09);
       --accent: #5865F2;
       --accent-glow: rgba(88, 101, 242, 0.45);
       --success: #23a559;
@@ -30,101 +30,58 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 3rem 1.25rem;
-      overflow-x: hidden;
+      padding: 2.5rem 1.25rem;
       position: relative;
     }
 
     .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(110px);
-      z-index: -1;
-      opacity: 0.45;
+      position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.38;
       animation: float 14s ease-in-out infinite alternate;
     }
-    .orb-1 { width: 420px; height: 420px; background: #5865F2; top: -100px; left: -100px; }
-    .orb-2 { width: 360px; height: 360px; background: #9b59b6; bottom: -80px; right: -80px; animation-delay: -5s; }
+    .orb-1 { width: 460px; height: 460px; background: #5865F2; top: -120px; left: -100px; }
+    .orb-2 { width: 400px; height: 400px; background: #9b59b6; bottom: -100px; right: -100px; animation-delay: -6s; }
 
     @keyframes float {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.12); }
+      100% { transform: translate(50px, 40px) scale(1.15); }
     }
 
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .container { width: 100%; max-width: 920px; }
 
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.45); opacity: 0.5; }
-    }
-
-    .container {
-      width: 100%;
-      max-width: 720px;
-      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    header { text-align: center; margin-bottom: 2.5rem; }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(88, 101, 242, 0.14);
-      border: 1px solid rgba(88, 101, 242, 0.35);
-      color: #a5b4fc;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .badge span {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #23a559; animation: pulseDot 2s infinite;
-    }
-
+    header { text-align: center; margin-bottom: 2rem; }
     h1 {
-      font-size: 2.4rem; font-weight: 700; letter-spacing: -0.03em;
+      font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em;
       background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      background-clip: text;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
-
-    header p { color: var(--muted); font-size: 1rem; }
+    header p { color: var(--muted); font-size: 0.98rem; }
 
     .glass-card {
       background: var(--card);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 1.75rem;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
-      margin-bottom: 2rem;
+      padding: 1.6rem;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1.75rem;
     }
 
-    .input-group { display: flex; flex-direction: column; gap: 0.9rem; }
-    .row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-    input {
-      flex: 1; min-width: 220px;
-      background: rgba(10, 11, 18, 0.8);
+    .deploy-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    input, select, textarea {
+      background: rgba(10, 11, 18, 0.9);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.9rem 1.1rem;
+      padding: 0.85rem 1rem;
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
-      transition: border-color 0.25s, box-shadow 0.25s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
-    input:focus {
+    input:focus, select:focus, textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
@@ -132,57 +89,98 @@
     button {
       cursor: pointer; border: none; border-radius: 12px;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600; font-size: 0.95rem; padding: 0.9rem 1.5rem;
-      transition: transform 0.18s ease, box-shadow 0.25s ease, background 0.25s ease;
+      font-weight: 600; font-size: 0.9rem; padding: 0.85rem 1.35rem;
+      transition: transform 0.15s ease, background 0.2s ease;
     }
-
     button:active { transform: scale(0.97); }
-
-    .btn-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 8px 20px var(--accent-glow);
-      width: 100%;
-    }
-    .btn-primary:hover { background: #4752c4; transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 20px var(--accent-glow); }
+    .btn-primary:hover { background: #4752c4; }
 
     .section-title {
-      font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--muted); margin-bottom: 1rem;
-      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;
     }
-
-    .bot-list { display: flex; flex-direction: column; gap: 0.85rem; }
 
     .bot-item {
-      background: rgba(14, 16, 26, 0.85);
+      background: rgba(14, 16, 26, 0.92);
       border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.1rem 1.25rem;
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 1rem; animation: slideUp 0.35s ease;
+      border-radius: 16px; padding: 1.4rem;
+      margin-bottom: 1.25rem;
     }
 
-    .bot-info { display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+    .bot-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .bot-name { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
 
-    .bot-name { font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
-
-    .status-pill { font-size: 0.72rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; text-transform: uppercase; }
+    .status-pill { font-size: 0.72rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; }
     .status-running { background: rgba(35, 165, 89, 0.18); color: #4ade80; border: 1px solid rgba(35, 165, 89, 0.35); }
     .status-deploying { background: rgba(240, 178, 50, 0.18); color: #facc15; border: 1px solid rgba(240, 178, 50, 0.35); }
     .status-stopped { background: rgba(218, 55, 60, 0.18); color: #f87171; border: 1px solid rgba(218, 55, 60, 0.35); }
     .status-error { background: rgba(218, 55, 60, 0.25); color: #fca5a5; border: 1px solid rgba(218, 55, 60, 0.5); }
 
-    .token-preview { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--muted); }
-    .error-text { font-size: 0.78rem; color: #f87171; font-weight: 500; margin-top: 2px; }
+    .token-preview { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
 
-    .actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-    .btn-stop { background: rgba(218, 55, 60, 0.16); color: #f87171; border: 1px solid rgba(218, 55, 60, 0.3); padding: 0.55rem 0.95rem; font-size: 0.82rem; }
+    .btn-sm { padding: 0.5rem 0.95rem; font-size: 0.82rem; border-radius: 8px; font-weight: 600; }
+    .btn-stop { background: rgba(218, 55, 60, 0.16); color: #f87171; border: 1px solid rgba(218, 55, 60, 0.3); }
     .btn-stop:hover { background: var(--danger); color: #fff; }
-    .btn-start { background: rgba(35, 165, 89, 0.16); color: #4ade80; border: 1px solid rgba(35, 165, 89, 0.3); padding: 0.55rem 0.95rem; font-size: 0.82rem; }
+    .btn-start { background: rgba(35, 165, 89, 0.16); color: #4ade80; border: 1px solid rgba(35, 165, 89, 0.3); }
     .btn-start:hover { background: var(--success); color: #fff; }
-    .btn-delete { background: rgba(255, 255, 255, 0.05); color: var(--muted); padding: 0.55rem 0.8rem; font-size: 0.82rem; }
-    .btn-delete:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+    .btn-config { background: rgba(88, 101, 242, 0.18); color: #a5b4fc; border: 1px solid rgba(88, 101, 242, 0.35); }
+    .btn-config:hover { background: var(--accent); color: #fff; }
+    .btn-delete { background: rgba(255, 255, 255, 0.06); color: var(--muted); }
+    .btn-delete:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
 
-    .empty-state { text-align: center; padding: 2rem 1rem; color: var(--muted); font-size: 0.92rem; }
+    /* Modal for Command Studio */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(5, 6, 10, 0.8);
+      backdrop-filter: blur(8px); z-index: 100; display: flex; justify-content: center; align-items: center;
+      padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+    .modal-card {
+      background: #11131c; border: 1px solid var(--border); border-radius: 20px;
+      width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7); overflow: hidden;
+    }
+    .modal-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; }
+    .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 0.75rem; background: rgba(0,0,0,0.2); }
+
+    .filter-bar { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .filter-bar input { flex: 1; min-width: 180px; padding: 0.6rem 0.9rem; font-size: 0.84rem; }
+    .filter-bar select { padding: 0.6rem 0.9rem; font-size: 0.84rem; }
+
+    .cmd-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.7rem; max-height: 280px; overflow-y: auto; padding-right: 4px;
+    }
+    .cmd-chip {
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.75rem; display: flex; flex-direction: column; justify-content: space-between; gap: 6px;
+    }
+    .cmd-chip.active { border-color: rgba(88, 101, 242, 0.6); background: rgba(88, 101, 242, 0.1); }
+    .cmd-chip-header { display: flex; justify-content: space-between; align-items: center; }
+    .cmd-name { font-family: 'JetBrains Mono', monospace; font-size: 0.84rem; font-weight: 600; color: #a5b4fc; }
+    .cmd-cat { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
+    .cmd-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+
+    .btn-cmd-action { padding: 4px 10px; font-size: 0.72rem; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    .btn-add-cmd { background: rgba(88, 101, 242, 0.22); color: #a5b4fc; border: 1px solid rgba(88, 101, 242, 0.45); }
+    .btn-rem-cmd { background: rgba(218, 55, 60, 0.22); color: #f87171; border: 1px solid rgba(218, 55, 60, 0.45); }
+
+    .custom-saved-item {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.85rem; margin-bottom: 0.5rem;
+    }
+    .badge-type { font-size: 0.68rem; padding: 2px 7px; border-radius: 6px; background: rgba(88, 101, 242, 0.2); color: #a5b4fc; font-family: 'JetBrains Mono', monospace; }
+
+    .log-box {
+      background: #050508; border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.85rem; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+      color: #38bdf8; height: 110px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; margin-top: 1rem;
+    }
+
+    .empty-state { text-align: center; padding: 2rem; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -191,27 +189,46 @@
 
   <div class="container">
     <header>
-      <div class="badge"><span></span> Cloud Worker Synced</div>
-      <h1>BetterCord Host</h1>
-      <p>Deploy your Discord bot token and keep it online 24/7 automatically.</p>
+      <h1>BetterCord Studio</h1>
+      <p>Add your Discord token, click Add Bot, set your commands, and launch 24/7.</p>
     </header>
 
     <div class="glass-card">
-      <form id="botForm" class="input-group">
-        <div class="row">
-          <input type="password" id="botToken" placeholder="Paste Discord Bot Token here..." required />
-        </div>
-        <button type="submit" class="btn-primary">Launch Bot 24/7</button>
+      <form id="botForm" class="deploy-row">
+        <input type="password" id="botToken" style="flex: 2; min-width: 240px;" placeholder="Paste Discord Bot Token here..." required />
+        <select id="defaultTrigger">
+          <option value="both">Both (! Prefix & / Slash)</option>
+          <option value="slash">Slash Commands Only (/)</option>
+          <option value="prefix">Prefix Commands Only (!)</option>
+        </select>
+        <button type="submit" class="btn-primary">Add Bot</button>
       </form>
     </div>
 
     <div class="glass-card">
       <div class="section-title">
-        <span>Your Deployed Bots</span>
+        <span>Your Managed Bots</span>
         <span id="botCount">0 Active</span>
       </div>
-      <div id="botList" class="bot-list">
-        <div class="empty-state">Connecting to database...</div>
+      <div id="botList">
+        <div class="empty-state">No bots added yet. Paste a token above and click Add Bot!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command Studio Modal -->
+  <div id="commandModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle" style="font-size: 1.1rem; font-weight: 700;">Command Studio</h3>
+        <button id="modalCloseX" class="btn-sm btn-delete" style="padding: 4px 10px;">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamically injected command editor content -->
+      </div>
+      <div class="modal-footer">
+        <button id="modalCancelBtn" class="btn-sm btn-delete">Cancel</button>
+        <button id="modalSaveBtn" class="btn-sm" style="background:var(--accent); color:#fff;">Save Changes</button>
       </div>
     </div>
   </div>
@@ -235,102 +252,326 @@
     const db = getDatabase(app);
     const botsRef = ref(db, "bots");
 
-    const botForm = document.getElementById("botForm");
-    const botList = document.getElementById("botList");
-    const botCount = document.getElementById("botCount");
+    let ownerId = localStorage.getItem("bettercord_owner_id");
+    if (!ownerId) {
+      ownerId = "user_" + crypto.randomUUID();
+      localStorage.setItem("bettercord_owner_id", ownerId);
+    }
+
+    const COMMAND_CATALOG = [
+      { id: "ping", cat: "Utility", desc: "Check bot WebSocket latency in ms" },
+      { id: "uptime", cat: "Utility", desc: "Show bot uptime duration" },
+      { id: "serverinfo", cat: "Info", desc: "Display server name and members count" },
+      { id: "userinfo", cat: "Info", desc: "Show your Discord account join date" },
+      { id: "avatar", cat: "Info", desc: "Display your profile avatar link" },
+      { id: "botinfo", cat: "Info", desc: "Show BetterCord runtime stats" },
+      { id: "roll", cat: "Games", desc: "Roll a random number from 1 to 100" },
+      { id: "coinflip", cat: "Games", desc: "Flip a coin: Heads or Tails" },
+      { id: "8ball", cat: "Fun", desc: "Ask the Magic 8-Ball a question" },
+      { id: "joke", cat: "Fun", desc: "Tell a random joke" },
+      { id: "fact", cat: "Fun", desc: "Share an interesting fun fact" },
+      { id: "quote", cat: "Fun", desc: "Send an inspirational quote" },
+      { id: "rps", cat: "Games", desc: "Play Rock, Paper, Scissors" },
+      { id: "slot", cat: "Games", desc: "Spin the emoji slot machine" },
+      { id: "hug", cat: "Social", desc: "Send a virtual hug" },
+      { id: "cookie", cat: "Social", desc: "Give someone a chocolate chip cookie" },
+      { id: "clear", cat: "Mod", desc: "Delete last 5 messages in chat" },
+      { id: "poll", cat: "Utility", desc: "Create a 👍 / 👎 reaction poll" },
+      { id: "help", cat: "Utility", desc: "List all active commands" }
+    ];
+
+    let cachedBotsData = {};
+    let activeModalBotId = null;
+    let modalWorkingState = null; // Holds unsaved edits inside modal
+    let hasUnsavedChanges = false;
 
     function maskToken(token) {
       if (!token || token.length < 12) return "••••••••••••";
       return `${token.slice(0, 6)}••••••••••••${token.slice(-4)}`;
     }
 
-    botForm.addEventListener("submit", async (e) => {
+    document.getElementById("botForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const token = document.getElementById("botToken").value.trim();
+      const triggerMode = document.getElementById("defaultTrigger").value;
       if (!token) return;
 
-      // Automatically generate a clean label using the first few chars of the token
-      const autoLabel = `Bot (${token.slice(0, 6)}...)`;
-
       await push(botsRef, {
-        label: autoLabel,
+        ownerId: ownerId,
+        label: `Bot (${token.slice(0, 6)}...)`,
         token: token,
-        status: "deploying",
-        botUsername: "Initializing...",
+        triggerMode: triggerMode,
+        status: "stopped", // Starts stopped until user clicks Start
+        botUsername: "Not Connected",
         errorMessage: "",
+        logs: "Bot added to dashboard.\nConfigure commands and click Start Bot when ready.",
+        commands: { ping: true, help: true },
+        customCommands: {},
         createdAt: Date.now()
       });
 
-      botForm.reset();
+      e.target.reset();
     });
 
     onValue(botsRef, (snapshot) => {
-      const data = snapshot.val();
+      const data = snapshot.val() || {};
+      cachedBotsData = data;
+      const botList = document.getElementById("botList");
       botList.innerHTML = "";
 
-      if (!data) {
-        botCount.textContent = "0 Active";
-        botList.innerHTML = `<div class="empty-state">No bots deployed yet. Paste a token above to start!</div>`;
+      const myEntries = Object.entries(data).filter(([, b]) => b.ownerId === ownerId);
+
+      if (myEntries.length === 0) {
+        document.getElementById("botCount").textContent = "0 Active";
+        botList.innerHTML = `<div class="empty-state">No bots added yet. Paste a token above and click Add Bot!</div>`;
         return;
       }
 
-      const entries = Object.entries(data);
-      const runningCount = entries.filter(([, b]) => b.status === "running").length;
-      botCount.textContent = `${runningCount} / ${entries.length} Online`;
+      const runningCount = myEntries.filter(([, b]) => b.status === "running").length;
+      document.getElementById("botCount").textContent = `${runningCount} / ${myEntries.length} Online`;
 
-      entries.forEach(([id, bot]) => {
+      myEntries.forEach(([id, bot]) => {
         const status = bot.status || "stopped";
         const isRunning = status === "running";
         const isDeploying = status === "deploying";
         const isError = status === "error";
 
-        let pillClass = "status-stopped";
-        let pillText = "Stopped";
+        let pillClass = "status-stopped", pillText = "Stopped";
         if (isRunning) { pillClass = "status-running"; pillText = "Running 24/7"; }
         else if (isDeploying) { pillClass = "status-deploying"; pillText = "Deploying..."; }
         else if (isError) { pillClass = "status-error"; pillText = "Error"; }
 
         const item = document.createElement("div");
         item.className = "bot-item";
-
         item.innerHTML = `
-          <div class="bot-info">
-            <div class="bot-name">
-              <span>${bot.label}</span>
-              <span class="status-pill ${pillClass}">${pillText}</span>
+          <div class="bot-header">
+            <div>
+              <div class="bot-name">
+                <span>${bot.label}</span>
+                <span class="status-pill ${pillClass}">${pillText}</span>
+              </div>
+              <div class="token-preview">
+                Discord: <strong>${bot.botUsername || "Pending"}</strong> • Token: ${maskToken(bot.token)}
+              </div>
+              ${isError && bot.errorMessage ? `<div style="color:#f87171; font-size:0.8rem; margin-top:4px;">⚠️ ${bot.errorMessage}</div>` : ""}
             </div>
-            <div class="token-preview">
-              Discord: <strong>${bot.botUsername || "Pending"}</strong> • Token: ${maskToken(bot.token)}
+            <div class="actions">
+              <button class="btn-sm btn-config" data-action="open-studio" data-id="${id}">⚙️ Set Commands</button>
+              ${isRunning || isDeploying
+                ? `<button class="btn-sm btn-stop" data-action="stop" data-id="${id}">Stop Bot</button>`
+                : `<button class="btn-sm btn-start" data-action="start" data-id="${id}">▶ Start Bot</button>`}
+              <button class="btn-sm btn-delete" data-action="delete" data-id="${id}" title="Delete">✕</button>
             </div>
-            ${isError && bot.errorMessage ? `<div class="error-text">⚠️ ${bot.errorMessage}</div>` : ""}
           </div>
-          <div class="actions">
-            ${
-              isRunning || isDeploying
-                ? `<button class="btn-stop" data-action="stop" data-id="${id}">Stop Bot</button>`
-                : `<button class="btn-start" data-action="start" data-id="${id}">Start Bot</button>`
-            }
-            <button class="btn-delete" data-action="delete" data-id="${id}" title="Remove">✕</button>
-          </div>
+          <div class="log-box">${bot.logs || "No logs yet."}</div>
         `;
         botList.appendChild(item);
       });
+
+      // If modal is open, keep live syncing state if needed
+      if (activeModalBotId && cachedBotsData[activeModalBotId] && !hasUnsavedChanges) {
+        // Optional background sync if desired
+      }
     });
 
-    botList.addEventListener("click", async (e) => {
+    // --- Command Studio Modal Logic ---
+    function openCommandStudio(botId) {
+      activeModalBotId = botId;
+      hasUnsavedChanges = false;
+      const bot = cachedBotsData[botId];
+      if (!bot) return;
+
+      // Deep copy bot commands so edits are staged until Save
+      modalWorkingState = {
+        triggerMode: bot.triggerMode || "both",
+        commands: { ...(bot.commands || {}) },
+        customCommands: JSON.parse(JSON.stringify(bot.customCommands || {}))
+      };
+
+      document.getElementById("modalTitle").textContent = `Command Studio — ${bot.label}`;
+      renderModalBody();
+      document.getElementById("commandModal").classList.add("active");
+    }
+
+    function renderModalBody() {
+      const body = document.getElementById("modalBody");
+      const enabledCount = Object.values(modalWorkingState.commands).filter(Boolean).length;
+      const customEntries = Object.entries(modalWorkingState.customCommands);
+
+      body.innerHTML = `
+        <div>
+          <label style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; font-weight:700; display:block; margin-bottom:0.5rem;">Global Trigger Mode</label>
+          <select id="modalTriggerMode" style="width:100%; margin-bottom:1rem;">
+            <option value="both" ${modalWorkingState.triggerMode === "both" ? "selected" : ""}>Both (! Prefix & / Slash)</option>
+            <option value="slash" ${modalWorkingState.triggerMode === "slash" ? "selected" : ""}>Slash Commands Only (/)</option>
+            <option value="prefix" ${modalWorkingState.triggerMode === "prefix" ? "selected" : ""}>Prefix Commands Only (!)</option>
+          </select>
+        </div>
+
+        <div>
+          <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; font-weight:700; margin-bottom:0.5rem;">
+            Built-in Command Library (${enabledCount} Enabled)
+          </div>
+          <div class="filter-bar">
+            <input type="text" id="modalSearch" placeholder="Search commands..." />
+            <select id="modalCatFilter">
+              <option value="ALL">All Categories</option>
+              <option value="Utility">Utility</option>
+              <option value="Info">Info</option>
+              <option value="Games">Games</option>
+              <option value="Fun">Fun</option>
+              <option value="Social">Social</option>
+              <option value="Mod">Moderation</option>
+            </select>
+          </div>
+          <div class="cmd-grid" id="modalCmdGrid"></div>
+        </div>
+
+        <div style="border-top:1px solid var(--border); padding-top:1rem;">
+          <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; font-weight:700; margin-bottom:0.75rem;">Custom Text Commands</div>
+          <div id="modalCustomList" style="margin-bottom:0.75rem;">
+            ${customEntries.map(([cName, cObj]) => `
+              <div class="custom-saved-item">
+                <div>
+                  <div style="display:flex; align-items:center; gap:8px; margin-bottom:3px;">
+                    <strong style="color:#a5b4fc; font-family:'JetBrains Mono', monospace;">!${cName}</strong>
+                    <span class="badge-type">${cObj.trigger || "both"}</span>
+                  </div>
+                  <div style="color:var(--muted); font-size:0.78rem;">${cObj.reply}</div>
+                </div>
+                <button class="btn-cmd-action btn-rem-cmd" data-del-custom="${cName}">Delete</button>
+              </div>
+            `).join("") || '<div style="font-size:0.8rem; color:var(--muted)">No custom commands added yet.</div>'}
+          </div>
+
+          <form id="modalCustomForm" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <input type="text" name="cName" placeholder="name (e.g. discord)" style="flex:1; min-width:130px;" required />
+            <select name="cTrigger">
+              <option value="both">Both (! & /)</option>
+              <option value="slash">Slash Only (/)</option>
+              <option value="prefix">Prefix Only (!)</option>
+            </select>
+            <input type="text" name="cReply" placeholder="Bot reply message..." style="flex:2; min-width:180px;" required />
+            <button type="submit" class="btn-sm" style="background:var(--accent); color:#fff;">+ Add</button>
+          </form>
+        </div>
+      `;
+
+      populateModalGrid();
+
+      // Bind modal internal event listeners
+      document.getElementById("modalTriggerMode").onchange = (e) => {
+        modalWorkingState.triggerMode = e.target.value;
+        hasUnsavedChanges = true;
+      };
+      document.getElementById("modalSearch").oninput = populateModalGrid;
+      document.getElementById("modalCatFilter").onchange = populateModalGrid;
+
+      document.getElementById("modalCustomForm").onsubmit = (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const name = fd.get("cName").trim().toLowerCase().replace(/[^a-z0-9_]/g, "");
+        const trigger = fd.get("cTrigger");
+        const reply = fd.get("cReply").trim();
+        if (!name || !reply) return;
+
+        modalWorkingState.customCommands[name] = { trigger, reply };
+        hasUnsavedChanges = true;
+        renderModalBody();
+      };
+
+      document.querySelectorAll("[data-del-custom]").forEach(btn => {
+        btn.onclick = (e) => {
+          const key = e.target.dataset.delCustom;
+          delete modalWorkingState.customCommands[key];
+          hasUnsavedChanges = true;
+          renderModalBody();
+        };
+      });
+    }
+
+    function populateModalGrid() {
+      const grid = document.getElementById("modalCmdGrid");
+      if (!grid) return;
+      const search = (document.getElementById("modalSearch").value || "").toLowerCase();
+      const cat = document.getElementById("modalCatFilter").value;
+
+      const filtered = COMMAND_CATALOG.filter(c => {
+        return (c.id.includes(search) || c.desc.toLowerCase().includes(search)) && (cat === "ALL" || c.cat === cat);
+      });
+
+      grid.innerHTML = filtered.map(c => {
+        const active = !!modalWorkingState.commands[c.id];
+        return `
+          <div class="cmd-chip ${active ? "active" : ""}">
+            <div>
+              <div class="cmd-chip-header">
+                <span class="cmd-name">!${c.id}</span>
+                <button type="button" class="btn-cmd-action ${active ? "btn-rem-cmd" : "btn-add-cmd"}" data-toggle-cmd="${c.id}">
+                  ${active ? "Remove" : "Add"}
+                </button>
+              </div>
+              <span class="cmd-cat">${c.cat}</span>
+            </div>
+            <span class="cmd-desc">${c.desc}</span>
+          </div>
+        `;
+      }).join("");
+
+      grid.querySelectorAll("[data-toggle-cmd]").forEach(btn => {
+        btn.onclick = (e) => {
+          const cmdId = e.target.dataset.toggleCmd;
+          modalWorkingState.commands[cmdId] = !modalWorkingState.commands[cmdId];
+          hasUnsavedChanges = true;
+          populateModalGrid();
+        };
+      });
+    }
+
+    async function saveModalChanges() {
+      if (!activeModalBotId) return;
+      await update(ref(db, `bots/${activeModalBotId}`), {
+        triggerMode: modalWorkingState.triggerMode,
+        commands: modalWorkingState.commands,
+        customCommands: modalWorkingState.customCommands
+      });
+      hasUnsavedChanges = false;
+      closeModal();
+    }
+
+    function closeModal() {
+      if (hasUnsavedChanges) {
+        if (!confirm("You have unsaved changes! Do you want to close without saving?")) return;
+      }
+      document.getElementById("commandModal").classList.remove("active");
+      activeModalBotId = null;
+      modalWorkingState = null;
+      hasUnsavedChanges = false;
+    }
+
+    document.getElementById("modalCloseX").onclick = closeModal;
+    document.getElementById("modalCancelBtn").onclick = closeModal;
+    document.getElementById("modalSaveBtn").onclick = saveModalChanges;
+
+    // --- Main Dashboard Action Handler ---
+    document.addEventListener("click", async (e) => {
       const btn = e.target.closest("button");
-      if (!btn) return;
+      if (!btn || !btn.dataset.action) return;
 
       const id = btn.dataset.id;
       const action = btn.dataset.action;
       const itemRef = ref(db, `bots/${id}`);
 
-      if (action === "stop") {
-        await update(itemRef, { status: "stopped", botUsername: "Stopped by user", errorMessage: "" });
+      if (action === "open-studio") {
+        openCommandStudio(id);
+      } else if (action === "stop") {
+        await update(itemRef, { status: "stopped", botUsername: "Stopped by user" });
       } else if (action === "start") {
-        await update(itemRef, { status: "deploying", botUsername: "Re-deploying...", errorMessage: "" });
+        await update(itemRef, { status: "deploying", botUsername: "Deploying 24/7..." });
       } else if (action === "delete") {
-        await remove(itemRef);
+        if (confirm("Are you sure you want to delete this bot?")) {
+          await remove(itemRef);
+        }
       }
     });
   </script>
